@@ -24,6 +24,21 @@ DESCRIBE EXTENDED managed_default
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC
+-- MAGIC ### EXPLORAR CARPETAS CON PYTHON
+-- MAGIC
+-- MAGIC `display(dbutils.fs.ls("/mnt"))`
+
+-- COMMAND ----------
+
+-- MAGIC %python
+-- MAGIC display(dbutils.fs.ls("/mnt"))
+-- MAGIC
+-- MAGIC
+
+-- COMMAND ----------
+
 CREATE TABLE external_default
   (width INT, length INT, height INT)
 LOCATION 'dbfs:/mnt/demo/external_default';
