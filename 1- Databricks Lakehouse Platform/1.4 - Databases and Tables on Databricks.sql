@@ -62,6 +62,16 @@ DROP TABLE managed_default
 
 -- COMMAND ----------
 
+-- MAGIC %python
+-- MAGIC display(dbutils.fs.ls("/user/hive/warehouse"))
+-- MAGIC
+
+-- COMMAND ----------
+
+-- MAGIC %fs ls 'dbfs:/user/hive/warehouse/new_default.db'
+
+-- COMMAND ----------
+
 -- MAGIC %fs ls 'dbfs:/user/hive/warehouse/managed_default'
 
 -- COMMAND ----------
@@ -76,6 +86,10 @@ DROP TABLE external_default
 
 -- MAGIC %md
 -- MAGIC ## Creating Schemas
+
+-- COMMAND ----------
+
+DROP SCHEMA new_default
 
 -- COMMAND ----------
 
@@ -119,6 +133,12 @@ DROP TABLE external_new_default;
 
 -- COMMAND ----------
 
+-- MAGIC %python
+-- MAGIC display(dbutils.fs.ls("/user/hive/warehouse/new_default.db"))
+-- MAGIC
+
+-- COMMAND ----------
+
 -- MAGIC %fs ls 'dbfs:/user/hive/warehouse/new_default.db/managed_new_default'
 
 -- COMMAND ----------
@@ -129,6 +149,10 @@ DROP TABLE external_new_default;
 
 -- MAGIC %md
 -- MAGIC ## Creating Schemas in Custom Location
+
+-- COMMAND ----------
+
+DROP SCHEMA custom
 
 -- COMMAND ----------
 
@@ -170,6 +194,12 @@ DESCRIBE EXTENDED external_custom
 
 DROP TABLE managed_custom;
 DROP TABLE external_custom;
+
+-- COMMAND ----------
+
+-- MAGIC %python
+-- MAGIC display(dbutils.fs.ls("/Shared/schemas/custom.db"))
+-- MAGIC
 
 -- COMMAND ----------
 
