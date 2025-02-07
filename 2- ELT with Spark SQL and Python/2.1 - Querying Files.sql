@@ -12,7 +12,17 @@
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC Coping into dbfs
+
+-- COMMAND ----------
+
 -- MAGIC %run ../Includes/Copy-Datasets
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC Coping into our directory
 
 -- COMMAND ----------
 
@@ -22,7 +32,23 @@
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC Quering one single json file form a path
+-- MAGIC
+-- MAGIC customerid, mail, profile (json)
+
+-- COMMAND ----------
+
 SELECT * FROM json.`${dataset.bookstore}/customers-json/export_001.json`
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC Wildcard directors to query multiple files simultaneusly:
+-- MAGIC
+-- MAGIC Quering todos los que arrancan por export
+-- MAGIC
+-- MAGIC "/export_*.json"
 
 -- COMMAND ----------
 
@@ -30,11 +56,30 @@ SELECT * FROM json.`${dataset.bookstore}/customers-json/export_*.json`
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC read all data in the following directory
+
+-- COMMAND ----------
+
 SELECT * FROM json.`${dataset.bookstore}/customers-json`
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC saber cuantos customers hay
+
+-- COMMAND ----------
+
 SELECT count(*) FROM json.`${dataset.bookstore}/customers-json`
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC while reading multiple files
+-- MAGIC its usefull to use the input_file_name() function
+-- MAGIC it records the source data file for each record
+-- MAGIC
+-- MAGIC helpfull for troubleshooting
 
 -- COMMAND ----------
 
@@ -49,12 +94,27 @@ SELECT count(*) FROM json.`${dataset.bookstore}/customers-json`
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC Text format to query any text based file
+
+-- COMMAND ----------
+
 SELECT * FROM text.`${dataset.bookstore}/customers-json`
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC value y un json lee el .text
 
 -- COMMAND ----------
 
 -- MAGIC %md 
 -- MAGIC ## Querying binaryFile Format
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC binaryfile format to extract binary file metadata
 
 -- COMMAND ----------
 
