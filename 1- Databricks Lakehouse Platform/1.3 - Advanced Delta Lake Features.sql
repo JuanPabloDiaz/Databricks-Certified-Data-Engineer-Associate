@@ -5,6 +5,11 @@
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC using version number
+
+-- COMMAND ----------
+
 USE CATALOG hive_metastore
 
 -- COMMAND ----------
@@ -13,8 +18,7 @@ DESCRIBE HISTORY employees
 
 -- COMMAND ----------
 
-SELECT * 
-FROM employees VERSION AS OF 4
+SELECT * FROM employees VERSION AS OF 2
 
 -- COMMAND ----------
 
@@ -34,6 +38,20 @@ RESTORE TABLE employees TO VERSION AS OF 5
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC Rollback version command
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC using timestamp
+
+-- COMMAND ----------
+
+-- SELECT * FROM employees TIMESTAMP AS OF "2022-01-01"
+
+-- COMMAND ----------
+
 SELECT * FROM employees
 
 -- COMMAND ----------
@@ -48,12 +66,23 @@ DESCRIBE HISTORY employees
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC Compacting small files to improve table performance
+
+-- COMMAND ----------
+
 DESCRIBE DETAIL employees
 
 -- COMMAND ----------
 
 OPTIMIZE employees
 ZORDER BY id
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC _number of files_ in this case was _4_ and now after running the ZORDER is _1_
+-- MAGIC `numFilesAdded=1`
 
 -- COMMAND ----------
 
@@ -75,6 +104,13 @@ DESCRIBE HISTORY employees
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC clean up unused data files
+-- MAGIC
+-- MAGIC Note: vacuum == no time travel
+
+-- COMMAND ----------
+
 VACUUM employees
 
 -- COMMAND ----------
@@ -83,11 +119,18 @@ VACUUM employees
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC need to specify the time to clean up if its less than 7 days which is the default
+
+-- COMMAND ----------
+
 VACUUM employees RETAIN 0 HOURS
 
 -- COMMAND ----------
 
 SET spark.databricks.delta.retentionDurationCheck.enabled = false;
+
+-- NOT recommended for PRODUCTION. (only demo purposes)
 
 -- COMMAND ----------
 
