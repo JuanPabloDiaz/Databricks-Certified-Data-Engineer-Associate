@@ -8,8 +8,17 @@ USE CATALOG hive_metastore
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC hive_metastore is deprecated. now use Unitity catalog
+
+-- COMMAND ----------
+
 CREATE TABLE employees
-  (id INT, name STRING, salary DOUBLE);
+  (id INT, name STRING, salary DOUBLE); -- >> table schema
+
+-- COMMAND ----------
+
+DROP TABLE employees
 
 -- COMMAND ----------
 
@@ -18,6 +27,7 @@ CREATE TABLE employees
 -- MAGIC ## Catalog Explorer
 -- MAGIC
 -- MAGIC Check the created **employees** table in the **Catalog** explorer.
+-- MAGIC - Go to UnityCatalog > legacy > hive_metastore > employees to verify the table was created
 
 -- COMMAND ----------
 
@@ -55,6 +65,12 @@ SELECT * FROM employees
 
 -- COMMAND ----------
 
+-- MAGIC %python
+-- MAGIC show = dbutils.fs.ls("dbfs:/user/hive/warehouse/employees")
+-- MAGIC display(show)
+
+-- COMMAND ----------
+
 -- MAGIC %md
 -- MAGIC ## Exploring Table Metadata
 
@@ -70,6 +86,11 @@ DESCRIBE DETAIL employees
 -- COMMAND ----------
 
 -- MAGIC %fs ls 'dbfs:/user/hive/warehouse/employees'
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC el archivo se ha corrido una vez pero tiene **4 files** en formato parquet porque el cluster tiene 4 cores y spark corre simultaneamente en todos para ser mas rapido. (me enrede explicando)
 
 -- COMMAND ----------
 
@@ -106,6 +127,11 @@ SELECT * FROM employees
 -- COMMAND ----------
 
 DESCRIBE HISTORY employees
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC check the transaction log
 
 -- COMMAND ----------
 

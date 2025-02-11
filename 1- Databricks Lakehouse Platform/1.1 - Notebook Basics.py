@@ -83,6 +83,10 @@ print(full_name)
 
 # COMMAND ----------
 
+dbutils.fs.ls('databricks-datasets/atlas_higgs')
+
+# COMMAND ----------
+
 # MAGIC %md
 # MAGIC ### dbutils
 # MAGIC This is the main library in Databricks that provides utilities for various tasks
