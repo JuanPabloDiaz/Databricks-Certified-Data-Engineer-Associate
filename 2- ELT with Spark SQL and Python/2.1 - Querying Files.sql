@@ -39,6 +39,8 @@
 
 -- COMMAND ----------
 
+-- SELECT * FROM file_format.`./path/to.file.ext`
+
 SELECT * FROM json.`${dataset.bookstore}/customers-json/export_001.json`
 
 -- COMMAND ----------
@@ -76,8 +78,8 @@ SELECT count(*) FROM json.`${dataset.bookstore}/customers-json`
 
 -- MAGIC %md
 -- MAGIC while reading multiple files
--- MAGIC its usefull to use the input_file_name() function
--- MAGIC it records the source data file for each record
+-- MAGIC its usefull to use the `input_file_name()` function,
+-- MAGIC it records the **source data file** for each record
 -- MAGIC
 -- MAGIC helpfull for troubleshooting
 
@@ -129,6 +131,14 @@ SELECT * FROM binaryFile.`${dataset.bookstore}/customers-json`
 -- COMMAND ----------
 
 SELECT * FROM csv.`${dataset.bookstore}/books-csv`
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC el CSV no muestra bien los datos ya que esta usando `;` en lugar de `,` para separar los datos.
+-- MAGIC
+-- MAGIC debemos formatear u organizar los datos para que sean leidos correctamente
+-- MAGIC > nota: debemos definir un schema de la tabla
 
 -- COMMAND ----------
 
