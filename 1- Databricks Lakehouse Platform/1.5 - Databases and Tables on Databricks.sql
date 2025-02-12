@@ -4,6 +4,11 @@
 
 -- COMMAND ----------
 
+-- MAGIC %md
+-- MAGIC database == schema
+
+-- COMMAND ----------
+
 USE CATALOG hive_metastore;
 
 CREATE TABLE managed_default
@@ -11,6 +16,11 @@ CREATE TABLE managed_default
 
 INSERT INTO managed_default
 VALUES (3 INT, 2 INT, 1 INT)
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC check metadata: location & type
 
 -- COMMAND ----------
 
@@ -26,7 +36,7 @@ DESCRIBE EXTENDED managed_default
 
 -- MAGIC %md
 -- MAGIC
--- MAGIC ### EXPLORAR CARPETAS CON PYTHON
+-- MAGIC ##### EXPLORAR CARPETAS CON PYTHON
 -- MAGIC
 -- MAGIC `display(dbutils.fs.ls("/mnt"))`
 
@@ -45,6 +55,11 @@ LOCATION 'dbfs:/mnt/demo/external_default';
   
 INSERT INTO external_default
 VALUES (3 INT, 2 INT, 1 INT)
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC verify its an external table
 
 -- COMMAND ----------
 
@@ -148,11 +163,16 @@ DROP TABLE external_new_default;
 -- COMMAND ----------
 
 -- MAGIC %md
+-- MAGIC the table has been dropped but the data is still at the location since its using an external directory
+
+-- COMMAND ----------
+
+-- MAGIC %md
 -- MAGIC ## Creating Schemas in Custom Location
 
 -- COMMAND ----------
 
-DROP SCHEMA custom
+DROP SCHEMA custom CASCADE
 
 -- COMMAND ----------
 
@@ -208,3 +228,11 @@ DROP TABLE external_custom;
 -- COMMAND ----------
 
 -- MAGIC %fs ls 'dbfs:/mnt/demo/external_custom'
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC Notas adicionales:
+-- MAGIC - `DROP SCHEMA` borra todo el esquema y sus objetos.
+-- MAGIC - `DELETE` elimina filas dentro de una tabla sin borrar la tabla.
+-- MAGIC
