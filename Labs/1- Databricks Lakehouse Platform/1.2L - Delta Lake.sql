@@ -48,7 +48,7 @@ WHERE name = "Eric";
 
 -- COMMAND ----------
 
---------------------
+SELECT * FROM persons;
 
 -- COMMAND ----------
 
@@ -59,7 +59,7 @@ WHERE name = "Eric";
 
 -- COMMAND ----------
 
---------------------
+DESCRIBE HISTORY persons
 
 -- COMMAND ----------
 
@@ -70,7 +70,7 @@ WHERE name = "Eric";
 
 -- COMMAND ----------
 
---------------------
+DESCRIBE DETAIL persons
 
 -- COMMAND ----------
 
@@ -83,7 +83,7 @@ WHERE name = "Eric";
 
 -- COMMAND ----------
 
---------------------
+-- MAGIC %fs ls 'dbfs:/user/hive/warehouse/persons'
 
 -- COMMAND ----------
 
