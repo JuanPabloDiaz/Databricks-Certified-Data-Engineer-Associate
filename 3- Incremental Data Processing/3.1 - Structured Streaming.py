@@ -7,13 +7,31 @@
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC %md
+# MAGIC # Data Stream
+# MAGIC
+# MAGIC data source that grows over time
+
+# COMMAND ----------
+
 # MAGIC %run ../Includes/Copy-Datasets
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC note: remember to cancel the streaming query
 
 # COMMAND ----------
 
 # MAGIC %md
 # MAGIC
 # MAGIC ## Reading Stream
+
+# COMMAND ----------
+
+# MAGIC %md
+# MAGIC entendi pero esta bien complicado seguirle la pista al curso sin saber Spark
 
 # COMMAND ----------
 
