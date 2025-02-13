@@ -63,6 +63,11 @@ SELECT count(*) FROM orders
 -- COMMAND ----------
 
 -- MAGIC %md
+-- MAGIC it simply add records but wont prevent duplicate data
+
+-- COMMAND ----------
+
+-- MAGIC %md
 -- MAGIC ## Merging Data
 
 -- COMMAND ----------

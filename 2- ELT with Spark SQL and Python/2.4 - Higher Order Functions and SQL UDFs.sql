@@ -40,6 +40,11 @@ WHERE size(multiple_copies) > 0;
 -- COMMAND ----------
 
 -- MAGIC %md
+-- MAGIC filtrar los datos
+
+-- COMMAND ----------
+
+-- MAGIC %md
 -- MAGIC
 -- MAGIC ## Transforming Arrays
 
@@ -53,6 +58,11 @@ SELECT
     b -> CAST(b.subtotal * 0.8 AS INT)
   ) AS subtotal_after_discount
 FROM orders;
+
+-- COMMAND ----------
+
+-- MAGIC %md
+-- MAGIC Crea una nueva columna con el valor: aplicar un descuento del 20% al producto
 
 -- COMMAND ----------
 
