@@ -28,6 +28,14 @@ SET datasets.path=dbfs:/mnt/demo-datasets/bookstore;
 
 -- COMMAND ----------
 
+-- run in the video, it should display a message like: DLT query is valid. but must create a pipeline to populate the table
+CREATE OR REFRESH STREAMING LIVE TABLE orders_raw
+COMMENT "The raw books orders, ingested from orders-raw"
+AS SELECT * FROM cloud_files("${datasets.path}/orders-raw", "parquet",
+                             map("schema", "order_id STRING, order_timestamp LONG, customer_id STRING, quantity LONG"))
+
+-- COMMAND ----------
+
 CREATE OR REFRESH STREAMING LIVE TABLE orders_raw
 COMMENT "The raw books orders, ingested from orders-raw"
 AS SELECT * FROM cloud_files("${datasets.path}/orders-json-raw", "json",
@@ -57,15 +65,15 @@ AS SELECT * FROM json.`${datasets.path}/customers-json`
 -- COMMAND ----------
 
 CREATE OR REFRESH STREAMING LIVE TABLE orders_cleaned (
-  CONSTRAINT valid_order_number EXPECT (order_id IS NOT NULL) ON VIOLATION DROP ROW
+  CONSTRAINT valid_order_number EXPECT (order_id IS NOT NULL) ON VIOLATION DROP ROW                 -- > quality control
 )
 COMMENT "The cleaned books orders with valid order_id"
 AS
   SELECT order_id, quantity, o.customer_id, c.profile:first_name as f_name, c.profile:last_name as l_name,
          cast(from_unixtime(order_timestamp, 'yyyy-MM-dd HH:mm:ss') AS timestamp) order_timestamp, o.books,
          c.profile:address:country as country
-  FROM STREAM(LIVE.orders_raw) o
-  LEFT JOIN LIVE.customers c
+  FROM STREAM(LIVE.orders_raw) o          -->>   Stream live method
+  LEFT JOIN LIVE.customers c                                 -->    LIVE   prefix is necessary
     ON o.customer_id = c.customer_id
 
 -- COMMAND ----------
