@@ -7,6 +7,12 @@
 
 # COMMAND ----------
 
+# MAGIC %md
+# MAGIC ![Multi-Hop Architecture](./Multi-HopArchitecture.png)
+# MAGIC - organize data in multi-layered aproach
+
+# COMMAND ----------
+
 # MAGIC %run ../Includes/Copy-Datasets
 
 # COMMAND ----------
